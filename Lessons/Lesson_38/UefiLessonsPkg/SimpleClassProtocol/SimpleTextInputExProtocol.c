@@ -7,7 +7,6 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 
-// #include <Protocol/SimpleTextInputEx.h>
 #include <Protocol/SimpleTextInEx.h>
 
 EFI_HANDLE SimpleTextInputExHandle = NULL;
