@@ -6,22 +6,21 @@
 
 [Defines]
   INF_VERSION                    = 1.25
-  BASE_NAME                      = SimpleClassProtocol
+  BASE_NAME                      = SimpleTextInputExProtocol
   FILE_GUID                      = 51d6a90a-c021-4472-b2c1-5fdd1b7f2196
   MODULE_TYPE                    = UEFI_DRIVER
   VERSION_STRING                 = 1.0
-  ENTRY_POINT                    = SimpleClassProtocolDriverEntryPoint
-  UNLOAD_IMAGE                   = SimpleClassProtocolDriverUnload
+  ENTRY_POINT                    = SimpleTextInputExProtocolDriverEntryPoint
+  UNLOAD_IMAGE                   = SimpleTextInputExProtocolDriverUnload
 
 [Sources]
-  SimpleClassProtocol.c
+  SimpleTextInputExProtocol.c
 
 [Packages]
   MdePkg/MdePkg.dec
-  UefiLessonsPkg/UefiLessonsPkg.dec
 
 [Protocols]
-  gSimpleClassProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid             ## BY_START
 
 [LibraryClasses]
   UefiDriverEntryPoint

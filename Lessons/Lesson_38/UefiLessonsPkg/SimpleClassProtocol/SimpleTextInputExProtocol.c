@@ -7,45 +7,13 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 
-#include <Protocol/SimpleClass.h>
+//#include <Protocol/SimpleClass.h>
+#include <Protocol/SimpleTextInEx.h>
 
 
 EFI_HANDLE  mSimpleClassHandle = NULL;
 
 UINTN mNumber = 0;
-
-EFI_STATUS
-EFIAPI
-SimpleClassProtocolSetNumber (
-  UINTN Number
-  )
-{
-  mNumber = Number;
-
-  return EFI_SUCCESS;
-}
-
-
-EFI_STATUS
-EFIAPI
-SimpleClassProtocolGetNumber (
-  UINTN* Number
-  )
-{
-  if (Number == NULL) {
-    return EFI_INVALID_PARAMETER;
-  }
-
-  *Number = mNumber;
-
-  return EFI_SUCCESS;
-}
-
-
-SIMPLE_CLASS_PROTOCOL  mSimpleClass = {
-  SimpleClassProtocolGetNumber,
-  SimpleClassProtocolSetNumber
-};
 
 
 EFI_STATUS
