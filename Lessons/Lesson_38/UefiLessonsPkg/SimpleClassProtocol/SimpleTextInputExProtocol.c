@@ -17,7 +17,9 @@ UINTN mNumber = 0;
 
 //extern EFI_NATIVE_INTERFACE SimpleTextInputEx;
 
-struct _EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL SimpleTextInputEx{
+typedef struct _EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL  EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL;
+
+EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL SimpleTextInputEx{
   EFI_INPUT_RESET_EX              Reset;
   EFI_INPUT_READ_KEY_EX           ReadKeyStrokeEx;
   ///
