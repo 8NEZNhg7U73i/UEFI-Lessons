@@ -15,6 +15,8 @@ EFI_STATUS Status;
 
 EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *SimpleTextInputEx;
 
+EFI_DRIVER_BINDING_PROTOCOL *This;
+
 EFI_STATUS
 EFIAPI
 SimpleTextInputExProtocolDriverUnload(
@@ -38,10 +40,20 @@ SimpleTextInputExProtocolDriverEntryPoint(
     IN EFI_SYSTEM_TABLE *SystemTable)
 {
   Print(L"Hello from SimpleTextInputExProtocol driver\n");
+  /*
   Status = gBS->LocateProtocol(
       &gEfiSimpleTextInputExProtocolGuid,
       NULL,
       (VOID **)SimpleTextInputEx);
+  */
+  Status = gBS->OpenProtocol(
+      SimpleTextInputExHandle,
+      &gEfiSimpleTextInputExProtocolGuid,
+      (VOID **)SimpleTextInputEx,
+      This->DriverBindingHandle,
+      NULL,
+      BY_HANDLE_PROTOCOL);
+
   if (Status == EFI_NOT_FOUND)
   {
     Status = gBS->InstallMultipleProtocolInterfaces(
