@@ -68,7 +68,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
   }
   else
   {
-    return EFI_ALREADY_STARTED;
+    Print(L"Status: %r\n", Status);
   }
 
   return Status;
