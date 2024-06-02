@@ -11,15 +11,11 @@
 
 EFI_HANDLE  SimpleTextIn2Handle = NULL;
 
+EFI_STATUS Status;
+
 UINTN mNumber = 0;
 
-
-
-SIMPLE_CLASS_PROTOCOL  mSimpleClass = {
-  SimpleTextIn2ProtocolGetNumber,
-  SimpleTextIn2ProtocolSetNumber
-};
-
+EFI_SIMPLE_TEXTIN2_PROTOCOL *SimpleTextIn2;
 
 EFI_STATUS
 EFIAPI
