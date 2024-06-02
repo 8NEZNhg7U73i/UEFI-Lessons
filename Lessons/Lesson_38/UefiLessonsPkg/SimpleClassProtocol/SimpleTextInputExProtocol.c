@@ -15,8 +15,8 @@ EFI_HANDLE  SimpleTextInputExHandle = NULL;
 
 UINTN mNumber = 0;
 
-extern EFI_INTERFACE SimpleTextInputEx;
- 
+extern EFI_NATIVE_INTERFACE SimpleTextInputEx;
+
 EFI_STATUS
 EFIAPI
 SimpleTextInputExProtocolDriverUnload (
