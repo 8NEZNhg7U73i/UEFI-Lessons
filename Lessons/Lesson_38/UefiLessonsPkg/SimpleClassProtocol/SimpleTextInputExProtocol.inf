@@ -11,7 +11,7 @@
   MODULE_TYPE                    = UEFI_DRIVER
   VERSION_STRING                 = 1.0
   ENTRY_POINT                    = SimpleTextInputExProtocolDriverEntryPoint
-  UNLOAD_IMAGE                   = SimpleTextInputExProtocolDriverUnload
+  #UNLOAD_IMAGE                   = SimpleTextInputExProtocolDriverUnload
 
 [Sources]
   SimpleTextInputExProtocol.c
