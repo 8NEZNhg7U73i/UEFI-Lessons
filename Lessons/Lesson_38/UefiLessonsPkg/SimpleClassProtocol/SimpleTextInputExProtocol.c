@@ -11,8 +11,6 @@
 
 EFI_HANDLE SimpleTextInputExHandle = NULL;
 
-UINTN mNumber = 0;
-
 EFI_STATUS Status;
 
 EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL* SimpleTextInputEx;
