@@ -7,27 +7,27 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 
-//#include <Protocol/SimpleClass.h>
+//#include <Protocol/SimpleTextInputEx.h>
 #include <Protocol/SimpleTextInEx.h>
 
 
-EFI_HANDLE  mSimpleClassHandle = NULL;
+EFI_HANDLE  SimpleTextInputExHandle = NULL;
 
 UINTN mNumber = 0;
 
 
 EFI_STATUS
 EFIAPI
-SimpleClassProtocolDriverUnload (
+SimpleTextInputExProtocolDriverUnload (
   IN EFI_HANDLE        ImageHandle
   )
 {
-  Print(L"Bye-bye from SimpleClassProtocol driver, handle=%p\n", mSimpleClassHandle);
+  Print(L"Bye-bye from SimpleTextInputExProtocol driver, handle=%p\n", SimpleTextInputExHandle);
 
   EFI_STATUS Status = gBS->UninstallMultipleProtocolInterfaces(
-                             mSimpleClassHandle,
-                             &gSimpleClassProtocolGuid,
-                             &mSimpleClass,
+                             SimpleTextInputExHandle,
+                             &gSimpleTextInputExProtocolGuid,
+                             &SimpleTextInputEx,
                              NULL
                              );
 
@@ -36,23 +36,23 @@ SimpleClassProtocolDriverUnload (
 
 EFI_STATUS
 EFIAPI
-SimpleClassProtocolDriverEntryPoint (
+SimpleTextInputExProtocolDriverEntryPoint (
   IN EFI_HANDLE        ImageHandle,
   IN EFI_SYSTEM_TABLE  *SystemTable
   )
 {
-  Print(L"Hello from SimpleClassProtocol driver");
+  Print(L"Hello from SimpleTextInputExProtocol driver");
 
   EFI_STATUS Status = gBS->InstallMultipleProtocolInterfaces(
-                             &mSimpleClassHandle,
-                             &gSimpleClassProtocolGuid,
-                             &mSimpleClass,
+                             &SimpleTextInputExHandle,
+                             &gSimpleTextInputExProtocolGuid,
+                             &SimpleTextInputEx,
                              NULL
                              );
   if (!EFI_ERROR(Status))
-    Print(L", handle=%p\n", mSimpleClassHandle);
+    Print(L", handle=%p\n", SimpleTextInputExHandle);
   else
-    Print(L"\n", mSimpleClassHandle);
+    Print(L"\n", SimpleTextInputExHandle);
 
   return Status;
 }
