@@ -19,17 +19,7 @@ UINTN mNumber = 0;
 
 //typedef struct _EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL  EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL;
 
-EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL SimpleTextInputEx = {
-  EFI_INPUT_RESET_EX              Reset;
-  EFI_INPUT_READ_KEY_EX           ReadKeyStrokeEx;
-  ///
-  /// Event to use with WaitForEvent() to wait for a key to be available.
-  ///
-  EFI_EVENT                       WaitForKeyEx;
-  EFI_SET_STATE                   SetState;
-  EFI_REGISTER_KEYSTROKE_NOTIFY   RegisterKeyNotify;
-  EFI_UNREGISTER_KEYSTROKE_NOTIFY UnregisterKeyNotify;
-};
+EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL SimpleTextInputEx;
 
 EFI_STATUS
 EFIAPI
