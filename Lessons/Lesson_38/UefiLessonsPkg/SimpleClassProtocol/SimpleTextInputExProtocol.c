@@ -44,7 +44,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
   Status = gBS->LocateProtocol(
       &gEfiSimpleTextInputExProtocolGuid,
       NULL,
-      (VOID **)SimpleTextInputEx);
+      (VOID **)&SimpleTextInputEx);
 /*
   Status = gBS->OpenProtocol(
       SimpleTextInputExHandle,
