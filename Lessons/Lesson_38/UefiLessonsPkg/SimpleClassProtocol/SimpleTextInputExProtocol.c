@@ -14,6 +14,8 @@ EFI_HANDLE SimpleTextInputExHandle = NULL;
 
 UINTN mNumber = 0;
 
+EFI_STATUS Status;
+
 // extern EFI_NATIVE_INTERFACE SimpleTextInputEx;
 
 // typedef struct _EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL  EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL;
@@ -27,7 +29,7 @@ SimpleTextInputExProtocolDriverUnload(
 {
   Print(L"Bye-bye from SimpleTextInputExProtocol driver, handle=%p\n", SimpleTextInputExHandle);
 
-  EFI_STATUS Status = gBS->UninstallMultipleProtocolInterfaces(
+  Status = gBS->UninstallMultipleProtocolInterfaces(
       SimpleTextInputExHandle,
       &gEfiSimpleTextInputExProtocolGuid,
       &SimpleTextInputEx,
@@ -43,13 +45,13 @@ SimpleTextInputExProtocolDriverEntryPoint(
     IN EFI_SYSTEM_TABLE *SystemTable)
 {
   Print(L"Hello from SimpleTextInputExProtocol driver");
-  EFI_STATUS Status = gBS->LocateProtocol(
+  Status = gBS->LocateProtocol(
       &gEfiSimpleTextInputExProtocolGuid,
       NULL,
       &SimpleTextInputEx);
   if (Status == EFI_NOT_FOUND)
   {
-    EFI_STATUS Status = gBS->InstallMultipleProtocolInterfaces(
+    Status = gBS->InstallMultipleProtocolInterfaces(
         &SimpleTextInputExHandle,
         &gEfiSimpleTextInputExProtocolGuid,
         &SimpleTextInputEx,
