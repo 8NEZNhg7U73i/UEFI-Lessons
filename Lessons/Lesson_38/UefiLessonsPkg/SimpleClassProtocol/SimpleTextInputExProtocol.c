@@ -40,6 +40,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
     IN EFI_SYSTEM_TABLE *SystemTable)
 {
   Print(L"Hello from SimpleTextInputExProtocol driver\n");
+  Print(L"GUID: [%g]\n", gEfiSimpleTextInputExProtocolGuid);
   Status = gBS->LocateProtocol(
       &gEfiSimpleTextInputExProtocolGuid,
       NULL,
