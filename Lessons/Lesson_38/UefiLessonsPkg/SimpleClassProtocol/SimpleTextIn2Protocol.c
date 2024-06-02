@@ -7,58 +7,31 @@
 #include <Library/UefiBootServicesTableLib.h>
 #include <Library/UefiLib.h>
 
-#include <Protocol/SimpleClass.h>
+#include "SimpleTextIn2Protocol"
 
-
-EFI_HANDLE  mSimpleClassHandle = NULL;
+EFI_HANDLE  SimpleTextIn2Handle = NULL;
 
 UINTN mNumber = 0;
 
-EFI_STATUS
-EFIAPI
-SimpleClassProtocolSetNumber (
-  UINTN Number
-  )
-{
-  mNumber = Number;
-
-  return EFI_SUCCESS;
-}
-
-
-EFI_STATUS
-EFIAPI
-SimpleClassProtocolGetNumber (
-  UINTN* Number
-  )
-{
-  if (Number == NULL) {
-    return EFI_INVALID_PARAMETER;
-  }
-
-  *Number = mNumber;
-
-  return EFI_SUCCESS;
-}
 
 
 SIMPLE_CLASS_PROTOCOL  mSimpleClass = {
-  SimpleClassProtocolGetNumber,
-  SimpleClassProtocolSetNumber
+  SimpleTextIn2ProtocolGetNumber,
+  SimpleTextIn2ProtocolSetNumber
 };
 
 
 EFI_STATUS
 EFIAPI
-SimpleClassProtocolDriverUnload (
+SimpleTextIn2ProtocolDriverUnload (
   IN EFI_HANDLE        ImageHandle
   )
 {
-  Print(L"Bye-bye from SimpleClassProtocol driver, handle=%p\n", mSimpleClassHandle);
+  Print(L"Bye-bye from SimpleTextIn2Protocol driver, handle=%p\n", SimpleTextIn2Handle);
 
   EFI_STATUS Status = gBS->UninstallMultipleProtocolInterfaces(
-                             mSimpleClassHandle,
-                             &gSimpleClassProtocolGuid,
+                             SimpleTextIn2Handle,
+                             &gSimpleTextIn2ProtocolGuid,
                              &mSimpleClass,
                              NULL
                              );
@@ -68,23 +41,23 @@ SimpleClassProtocolDriverUnload (
 
 EFI_STATUS
 EFIAPI
-SimpleClassProtocolDriverEntryPoint (
+SimpleTextIn2ProtocolDriverEntryPoint (
   IN EFI_HANDLE        ImageHandle,
   IN EFI_SYSTEM_TABLE  *SystemTable
   )
 {
-  Print(L"Hello from SimpleClassProtocol driver");
+  Print(L"Hello from SimpleTextIn2Protocol driver");
 
   EFI_STATUS Status = gBS->InstallMultipleProtocolInterfaces(
-                             &mSimpleClassHandle,
-                             &gSimpleClassProtocolGuid,
+                             &SimpleTextIn2Handle,
+                             &gSimpleTextIn2ProtocolGuid,
                              &mSimpleClass,
                              NULL
                              );
   if (!EFI_ERROR(Status))
-    Print(L", handle=%p\n", mSimpleClassHandle);
+    Print(L", handle=%p\n", SimpleTextIn2Handle);
   else
-    Print(L"\n", mSimpleClassHandle);
+    Print(L"\n", SimpleTextIn2Handle);
 
   return Status;
 }
