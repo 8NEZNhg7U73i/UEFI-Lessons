@@ -26,7 +26,7 @@ SimpleTextInputExProtocolDriverUnload (
 
   EFI_STATUS Status = gBS->UninstallMultipleProtocolInterfaces(
                              SimpleTextInputExHandle,
-                             &gSimpleTextInputExProtocolGuid,
+                             &gEfiSimpleTextInputExProtocolGuid,
                              &SimpleTextInputEx,
                              NULL
                              );
@@ -45,7 +45,7 @@ SimpleTextInputExProtocolDriverEntryPoint (
 
   EFI_STATUS Status = gBS->InstallMultipleProtocolInterfaces(
                              &SimpleTextInputExHandle,
-                             &gSimpleTextInputExProtocolGuid,
+                             &gEfiSimpleTextInputExProtocolGuid,
                              &SimpleTextInputEx,
                              NULL
                              );
