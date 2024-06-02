@@ -48,7 +48,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
   Status = gBS->LocateProtocol(
       &gEfiSimpleTextInputExProtocolGuid,
       NULL,
-      &SimpleTextInputEx);
+      (VOID **)SimpleTextInputEx);
   if (Status == EFI_NOT_FOUND)
   {
     Status = gBS->InstallMultipleProtocolInterfaces(
