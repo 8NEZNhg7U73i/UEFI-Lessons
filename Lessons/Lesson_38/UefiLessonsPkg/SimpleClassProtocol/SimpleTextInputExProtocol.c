@@ -52,7 +52,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
       (VOID **)SimpleTextInputEx,
       This->DriverBindingHandle,
       NULL,
-      BY_HANDLE_PROTOCOL);
+      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL);
 
   if (Status == EFI_NOT_FOUND)
   {
