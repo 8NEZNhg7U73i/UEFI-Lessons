@@ -44,7 +44,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
     IN EFI_HANDLE ImageHandle,
     IN EFI_SYSTEM_TABLE *SystemTable)
 {
-  Print(L"Hello from SimpleTextInputExProtocol driver");
+  Print(L"Hello from SimpleTextInputExProtocol driver\n");
   Status = gBS->LocateProtocol(
       &gEfiSimpleTextInputExProtocolGuid,
       NULL,
@@ -63,6 +63,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
   }
   else
   {
+    Print(L"Error Status:%r\n", EFI_ALREADY_STARTED);
     return EFI_ALREADY_STARTED;
   }
 
