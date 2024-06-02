@@ -9,13 +9,21 @@
 
 #include "SimpleTextIn2Protocol"
 
-EFI_HANDLE  SimpleTextIn2Handle = NULL;
-
+EFI_HANDLE SimpleTextIn2Handle = NULL;
 EFI_STATUS Status;
-
 UINTN mNumber = 0;
-
 EFI_SIMPLE_TEXTIN2_PROTOCOL *SimpleTextIn2;
+EFI_INPUT           key;
+EFI_STATUS EFI_API function(){
+  return EFI_SUCCESS;
+}
+EFI_HANDLE handle;
+
+EFI_STATUS EFI_API RegisterKeyNotify(&SimpleTextIn2, &key, &function, &handle){
+  EFI_EVENT event;
+
+  Status = gBS->CreateEvent()
+}
 
 EFI_STATUS
 EFIAPI
