@@ -9,6 +9,11 @@
 #include <Library/DebugLib.h>
 #include <Protocol/SimpleTextInEx.h>
 #include <Library/PrintLib.h>
+#include <Uefi.h>
+#include <Library/UefiDriverEntryPoint.h>
+#include <Library/UefiRuntimeServicesTableLib.h>
+#include <Protocol/GraphicsOutput.h>
+#include <Protocol/SimpleFileSystem.h>
 
 
 EFI_HANDLE SimpleTextInputExHandle = NULL;
