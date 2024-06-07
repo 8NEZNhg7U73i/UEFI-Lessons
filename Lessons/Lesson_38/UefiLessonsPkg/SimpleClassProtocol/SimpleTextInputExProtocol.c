@@ -39,14 +39,14 @@ SimpleTextInputExProtocolDriverEntryPoint(
     IN EFI_HANDLE ImageHandle,
     IN EFI_SYSTEM_TABLE *SystemTable)
 {
-  Print(L"Hello from SimpleTextInputExProtocol driver\n");
-  Print(L"GUID: [%g]\n", gEfiSimpleTextInputExProtocolGuid);
+  //Print(L"Hello from SimpleTextInputExProtocol driver\n");
+  //Print(L"GUID: [%g]\n", gEfiSimpleTextInputExProtocolGuid);
   UINTN                             SimpleTextInHandleCount = 0;
   EFI_HANDLE                        *SimpleTextInHandleBuffer = NULL;
   UINTN                             SimpleTextInputExHandleCount = 0;
   EFI_HANDLE                        *SimpleTextInputExHandleBuffer = NULL;
-  Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInputExProtocolGuid, NULL, &SimpleTextInputExHandleCount, &SimpleTextInputExHandleBuffer);
 
+  Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInputExProtocolGuid, NULL, &SimpleTextInputExHandleCount, &SimpleTextInputExHandleBuffer);
   if (Status == EFI_NOT_FOUND)
   {
     Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInProtocolGuid, NULL, &SimpleTextInHandleCount, &SimpleTextInHandleBuffer);
@@ -54,10 +54,15 @@ SimpleTextInputExProtocolDriverEntryPoint(
         DEBUG((-1, "ShowStatus: SimpleText In protocol not found\n"));
         return EFI_INVAILD;
     } else {
-        for (Index = 0; Index < SimpleTextInHandleBuffer; Index++) {
-            Status = gBS->InstallProtocolInterface(&SimpleTextInHandleBuffer[Index], &gEfiSimpleTextInputExProtocolGuid, EFI_NATIVE_INTERFACE, &SimpleTextInputEx);
-            
+      for (Index = 0; Index < SimpleTextInHandleBuffer; Index++) {
+        Status = gBS->InstallProtocolInterface(&SimpleTextInHandleBuffer[Index], &gEfiSimpleTextInputExProtocolGuid, EFI_NATIVE_INTERFACE, &SimpleTextInputEx);
+        if (EFI_ERROR (Status)) {
+            DEBUG((-1, "ShowStatus: SimpleText InputEx protocol installed failed: %r\n", Status));
+            return EFI_INVAILD;
+        }
+      }
     }
+  }
     /*
     Status = gBS->InstallProtocolInterface(&CrScreenHandle, &gCrScreenShotGuid, EFI_NATIVE_INTERFACE, NULL);
 
@@ -70,12 +75,12 @@ SimpleTextInputExProtocolDriverEntryPoint(
       Print(L", handle=%p\n", SimpleTextInputExHandle);
     else
       Print(L"\n", SimpleTextInputExHandle);
-    */
   }
   else
   {
     Print(L"Status: %r\n", Status);
   }
+    */
 
-  return Status;
+    return Status;
 }
