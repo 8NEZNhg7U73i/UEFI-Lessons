@@ -46,6 +46,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
   EFI_HANDLE                        *SimpleTextInHandleBuffer = NULL;
   UINTN                             SimpleTextInputExHandleCount = 0;
   EFI_HANDLE                        *SimpleTextInputExHandleBuffer = NULL;
+  UINTN                             Index;
 
   Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInputExProtocolGuid, NULL, &SimpleTextInputExHandleCount, &SimpleTextInputExHandleBuffer);
   if (Status == EFI_NOT_FOUND)
