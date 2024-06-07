@@ -27,3 +27,4 @@
   UefiDriverEntryPoint
   UefiLib
   DebugLib
+  PrintLib

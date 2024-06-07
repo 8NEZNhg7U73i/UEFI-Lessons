@@ -8,6 +8,7 @@
 #include <Library/UefiLib.h>
 #include <Library/DebugLib.h>
 #include <Protocol/SimpleTextInEx.h>
+#include <Library/PrintLib.h>
 
 
 EFI_HANDLE SimpleTextInputExHandle = NULL;
@@ -53,13 +54,13 @@ SimpleTextInputExProtocolDriverEntryPoint(
   {
     Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInProtocolGuid, NULL, &SimpleTextInHandleCount, &SimpleTextInHandleBuffer);
     if (EFI_ERROR (Status)) {
-        DEBUG((-1, "ShowStatus: SimpleText In protocol not found\n"));
+        DEBUG ((-1, "ShowStatus: SimpleText In protocol not found\n"));
         return EFI_UNSUPPORTED;
     } else {
       for (Index = 0; Index < SimpleTextInHandleCount; Index++) {
         Status = gBS->InstallProtocolInterface(&SimpleTextInHandleBuffer[Index], &gEfiSimpleTextInputExProtocolGuid, EFI_NATIVE_INTERFACE, &SimpleTextInputEx);
         if (EFI_ERROR (Status)) {
-            DEBUG((-1, "ShowStatus: SimpleText InputEx protocol installed failed: %r\n", Status));
+            DEBUG ((-1, "ShowStatus: SimpleText InputEx protocol installed failed: %r\n", Status));
             return EFI_UNSUPPORTED;
         }
       }
