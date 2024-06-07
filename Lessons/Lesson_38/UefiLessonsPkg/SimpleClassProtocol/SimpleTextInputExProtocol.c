@@ -53,13 +53,13 @@ SimpleTextInputExProtocolDriverEntryPoint(
     Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInProtocolGuid, NULL, &SimpleTextInHandleCount, &SimpleTextInHandleBuffer);
     if (EFI_ERROR (Status)) {
         DEBUG((-1, "ShowStatus: SimpleText In protocol not found\n"));
-        return EFI_INVAILD;
+        return EFI_UNSUPPORTED;
     } else {
       for (Index = 0; Index < SimpleTextInHandleBuffer; Index++) {
         Status = gBS->InstallProtocolInterface(&SimpleTextInHandleBuffer[Index], &gEfiSimpleTextInputExProtocolGuid, EFI_NATIVE_INTERFACE, &SimpleTextInputEx);
         if (EFI_ERROR (Status)) {
             DEBUG((-1, "ShowStatus: SimpleText InputEx protocol installed failed: %r\n", Status));
-            return EFI_INVAILD;
+            return EFI_UNSUPPORTED;
         }
       }
     }
