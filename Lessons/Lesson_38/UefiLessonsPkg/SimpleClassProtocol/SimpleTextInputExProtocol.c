@@ -41,22 +41,26 @@ SimpleTextInputExProtocolDriverEntryPoint(
 {
   Print(L"Hello from SimpleTextInputExProtocol driver\n");
   Print(L"GUID: [%g]\n", gEfiSimpleTextInputExProtocolGuid);
-  Status = gBS->LocateProtocol(
-      &gEfiSimpleTextInputExProtocolGuid,
-      NULL,
-      (VOID **)&SimpleTextInputEx);
-/*
-  Status = gBS->OpenProtocol(
-      SimpleTextInputExHandle,
-      &gEfiSimpleTextInputExProtocolGuid,
-      (VOID **)SimpleTextInputEx,
-      This->DriverBindingHandle,
-      NULL,
-      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL);
-*/
+  UINTN                             SimpleTextInHandleCount = 0;
+  EFI_HANDLE                        *SimpleTextInHandleBuffer = NULL;
+  UINTN                             SimpleTextInputExHandleCount = 0;
+  EFI_HANDLE                        *SimpleTextInputExHandleBuffer = NULL;
+  Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInputExProtocolGuid, NULL, &SimpleTextInputExHandleCount, &SimpleTextInputExHandleBuffer);
 
   if (Status == EFI_NOT_FOUND)
   {
+    Status = gBS->LocateHandleBuffer (ByProtocol, &gEfiSimpleTextInProtocolGuid, NULL, &SimpleTextInHandleCount, &SimpleTextInHandleBuffer);
+    if (EFI_ERROR (Status)) {
+        DEBUG((-1, "ShowStatus: SimpleText In protocol not found\n"));
+        return EFI_INVAILD;
+    } else {
+        for (Index = 0; Index < SimpleTextInHandleBuffer; Index++) {
+            Status = gBS->InstallProtocolInterface(&SimpleTextInHandleBuffer[Index], &gEfiSimpleTextInputExProtocolGuid, EFI_NATIVE_INTERFACE, &SimpleTextInputEx);
+            
+    }
+    /*
+    Status = gBS->InstallProtocolInterface(&CrScreenHandle, &gCrScreenShotGuid, EFI_NATIVE_INTERFACE, NULL);
+
     Status = gBS->InstallMultipleProtocolInterfaces(
         &SimpleTextInputExHandle,
         &gEfiSimpleTextInputExProtocolGuid,
@@ -66,6 +70,7 @@ SimpleTextInputExProtocolDriverEntryPoint(
       Print(L", handle=%p\n", SimpleTextInputExHandle);
     else
       Print(L"\n", SimpleTextInputExHandle);
+    */
   }
   else
   {
